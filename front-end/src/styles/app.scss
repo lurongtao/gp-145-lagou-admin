@@ -1,0 +1,23 @@
+.hidden-xs {
+  display: inline-block;
+  height: 100%;
+}
+
+.navbar-nav {
+  height: 100%;
+  .user-menu {
+    height: 50px !important;
+    a.btn-user {
+      display: block;
+      height: 100%;
+      padding: 0 !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      span#btn-signin, span#btn-signup {
+        line-height: 50px;
+        padding: 0 5px;
+      }
+    }
+  }
+}
