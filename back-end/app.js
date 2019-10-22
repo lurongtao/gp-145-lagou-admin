@@ -10,8 +10,13 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.engine('art', require('express-art-template'));
+app.set('view options', {
+    debug: process.env.NODE_ENV !== 'production',
+    escape: false
+});
+app.set('views', path.join(__dirname, './views'));
+app.set('view engine', 'art')
 
 app.use(logger('dev'));
 app.use(express.json());

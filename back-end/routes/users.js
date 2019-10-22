@@ -1,8 +1,8 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
-router.post('/signup', function(req, res, next) {
-  res.send('respond with a resource');
-});
+const { signup } = require('../controllers/users')
 
-module.exports = router;
+router.post('/signup', signup)
+
+module.exports = router

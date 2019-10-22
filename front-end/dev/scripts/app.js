@@ -153,7 +153,19 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _vie
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _views_nav_art__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../views/nav.art */ \"../scripts/views/nav.art\");\n/* harmony import */ var _views_nav_art__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_views_nav_art__WEBPACK_IMPORTED_MODULE_0__);\n\n\nclass Users {\n  constructor() {\n    this.render()\n  }\n\n  render() {\n    let html = _views_nav_art__WEBPACK_IMPORTED_MODULE_0___default()()\n    $('#nav').html(html)\n\n    // 提交\n    $('#btn-submit').on('click', this.handleSubmit.bind(this))\n  }\n\n  handleSubmit() {\n    let data = $('.form-horizontal').serialize()\n    $.ajax({\n      url: '/api/users/signup',\n      type: 'POST',\n      data,\n      success: this.handleSubmitSucc\n    })\n  }\n\n  handleSubmitSucc() {\n    console.log(0)\n  }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (new Users());\n\n//# sourceURL=webpack:///../scripts/controllers/users.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _views_nav_art__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../views/nav.art */ \"../scripts/views/nav.art\");\n/* harmony import */ var _views_nav_art__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_views_nav_art__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _models_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../models/http */ \"../scripts/models/http.js\");\n\n\n\n\nclass Users {\n  constructor() {\n    this.render()\n  }\n\n  render() {\n    let html = _views_nav_art__WEBPACK_IMPORTED_MODULE_0___default()()\n    $('#nav').html(html)\n\n    // 提交\n    $('#btn-submit').on('click', this.handleSubmit.bind(this))\n  }\n\n  async handleSubmit() {\n    let data = $('.form-horizontal').serialize()\n\n    let result = await _models_http__WEBPACK_IMPORTED_MODULE_1__[\"default\"].get({\n      url: '/api/users/signup',\n      data\n    })\n\n    this.handleSubmitSucc(result)\n  }\n\n  handleSubmitSucc(result) {\n    console.log(result)\n  }\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (new Users());\n\n//# sourceURL=webpack:///../scripts/controllers/users.js?");
+
+/***/ }),
+
+/***/ "../scripts/models/http.js":
+/*!*********************************!*\
+  !*** ../scripts/models/http.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  get({url, type='GET', data={}}) {\n    return $.ajax({\n      url: '/api/users/signup',\n      type: 'POST',\n      data,\n      success: (result) => {\n        return result\n      }\n    })\n  }\n});\n\n//# sourceURL=webpack:///../scripts/models/http.js?");
 
 /***/ }),
 

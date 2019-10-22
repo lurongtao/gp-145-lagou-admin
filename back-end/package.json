@@ -6,11 +6,14 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "art-template": "^4.13.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-art-template": "^1.0.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+    "mongoose": "^5.7.6",
     "morgan": "~1.9.1"
   }
 }
