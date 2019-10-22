@@ -1,10 +1,15 @@
 const { Users } = require('../utils/db')
 
-const signup = (data) => {
+const save = (data) => {
   const users = new Users(data)
   return users.save()
 }
 
+const findOne = (conditions) => {
+  return Users.findOne(conditions)
+}
+
 module.exports = {
-  signup
+  save,
+  findOne
 }

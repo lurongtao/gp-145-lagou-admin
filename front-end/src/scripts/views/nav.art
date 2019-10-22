@@ -107,8 +107,12 @@
         <!-- The user image in the navbar-->
         <img src="/assets/images/user2-160x160.jpg" class="user-image" alt="User Image">
         <!-- hidden-xs hides the username on small devices so only the image appears. -->
+        {{if isSignin}}
+        <span class="hidden-xs">欢迎你, <b>aaa</b></span>
+        {{else}}
         <span class="hidden-xs" id="btn-signin">登录</span>
         <span class="hidden-xs" id="btn-signup">注册</span>
+        {{/if}}
       </a>
       <ul class="dropdown-menu">
         <!-- The user image in the menu -->

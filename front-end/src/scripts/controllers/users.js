@@ -5,11 +5,21 @@ import httpModel from '../models/http'
 class Users {
   constructor() {
     this.render()
+    this.type = ''
   }
 
   render() {
-    let html = navView()
+    let that = this
+
+    let html = navView({
+      isSignin: false
+    })
     $('#nav').html(html)
+
+    // 注册登录按钮点击
+    $('#btn-signin, #btn-signup').on('click', function() {
+      that.type = $(this).attr('id')
+    })
 
     // 提交
     $('#btn-submit').on('click', this.handleSubmit.bind(this))
@@ -19,7 +29,8 @@ class Users {
     let data = $('.form-horizontal').serialize()
 
     let result = await httpModel.get({
-      url: '/api/users/signup',
+      // this.type 存储了用户点了“登录”或“注册”按钮
+      url: '/api/users/' + (this.type === 'btn-signin' ? 'signin' : 'signup'),
       data
     })
 
@@ -27,7 +38,17 @@ class Users {
   }
 
   handleSubmitSucc(result) {
-    console.log(result)
+    $('.form-horizontal')[0].reset()
+
+    if (result.ret) {
+      let html = navView({
+        isSignin: true
+      })
+      $('#nav').html(html)
+    } else {
+      alert(result.data.message)
+    }
+
   }
 }
 

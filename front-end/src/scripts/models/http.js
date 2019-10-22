@@ -1,7 +1,7 @@
 export default {
   get({url, type='GET', data={}}) {
     return $.ajax({
-      url: '/api/users/signup',
+      url,
       type: 'POST',
       data,
       success: (result) => {
