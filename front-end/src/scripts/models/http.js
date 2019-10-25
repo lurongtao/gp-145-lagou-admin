@@ -2,8 +2,9 @@ export default {
   get({url, type='GET', data={}}) {
     return $.ajax({
       url,
-      type: 'POST',
+      type,
       data,
+      dataType: 'json',
       success: (result) => {
         return result
       }
