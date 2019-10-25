@@ -108,7 +108,7 @@
         <img src="/assets/images/user2-160x160.jpg" class="user-image" alt="User Image">
         <!-- hidden-xs hides the username on small devices so only the image appears. -->
         {{if isSignin}}
-        <span class="hidden-xs">欢迎你, <b>aaa</b></span>
+        <span class="hidden-xs">欢迎你, <b>{{username}}</b></span>
         {{else}}
         <span class="hidden-xs" id="btn-signin">登录</span>
         <span class="hidden-xs" id="btn-signup">注册</span>
@@ -116,6 +116,7 @@
       </a>
       <ul class="dropdown-menu">
         <!-- The user image in the menu -->
+        {{if !isSignin}}
         <li class="user-header">
           <div class="box box-info">
             <!-- /.box-header -->
@@ -142,16 +143,16 @@
             </form>
           </div>
         </li>
-        <!--li class="user-header">
+        {{else}}
+        <li class="user-header">
           <img src="/assets/images/user2-160x160.jpg" class="img-circle" alt="User Image">
-
           <p>
-            Alexander Pierce - Web Developer
-            <small>Member since Nov. 2012</small>
+            欢迎您，
+            <small>{{username}}</small>
           </p>
-        </li-->
+        </li>
         <!-- Menu Body -->
-        <!--li class="user-body">
+        <li class="user-body">
           <div class="row">
             <div class="col-xs-4 text-center">
               <a href="#">花朵</a>
@@ -162,17 +163,24 @@
             <div class="col-xs-4 text-center">
               <a href="#">好友</a>
             </div>
-          </div-->
+          </div>
           <!-- /.row -->
         </li>
+        {{/if}}
         <!-- Menu Footer-->
         <li class="user-footer">
           <div class="pull-left">
             <a href="#" class="btn btn-default btn-flat">取消</a>
           </div>
+          {{if !isSignin}}
           <div class="pull-right" id="btn-submit">
             <a href="javascript:;" class="btn btn-primary btn-flat">确定</a>
           </div>
+          {{else}}
+          <div class="pull-right" id="btn-signout">
+            <a href="javascript:;" class="btn btn-primary btn-flat">注销</a>
+          </div>
+          {{/if}}
         </li>
       </ul>
     </li>

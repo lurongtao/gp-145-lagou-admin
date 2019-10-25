@@ -13,6 +13,8 @@
       display: flex;
       justify-content: center;
       align-items: center; }
-      .navbar-nav .user-menu a.btn-user span#btn-signin, .navbar-nav .user-menu a.btn-user span#btn-signup {
-        line-height: 50px;
+      .navbar-nav .user-menu a.btn-user span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         padding: 0 5px; }

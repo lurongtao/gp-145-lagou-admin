@@ -14,8 +14,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      span#btn-signin, span#btn-signup {
-        line-height: 50px;
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         padding: 0 5px;
       }
     }

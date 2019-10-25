@@ -55,6 +55,7 @@ const signin = async function(req, res, next) {
       res.render('succ', {
         data: JSON.stringify({
           type: 'signin',
+          username,
           message: '用户登录成功.'
         })
       })

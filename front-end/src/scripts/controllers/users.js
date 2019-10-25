@@ -42,9 +42,15 @@ class Users {
 
     if (result.ret) {
       let html = navView({
-        isSignin: true
+        isSignin: true,
+        username: result.data.username
       })
-      $('#nav').html(html)
+
+      if (this.type === 'btn-signin') {
+        $('#nav').html(html)
+      } else {
+        alert(result.data.message)
+      }
     } else {
       alert(result.data.message)
     }

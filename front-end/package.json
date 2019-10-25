@@ -29,6 +29,7 @@
     "css-loader": "^3.2.0",
     "lodash": "^4.17.15",
     "sass-loader": "^8.0.0",
+    "sme-router": "^0.12.8",
     "string-loader": "0.0.1",
     "style-loader": "^1.0.0"
   }
