@@ -4,7 +4,6 @@ export default {
       url,
       type,
       data,
-      dataType: 'json',
       success: (result) => {
         return result
       }

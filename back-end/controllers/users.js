@@ -1,5 +1,6 @@
 const usersModel = require('../models/users')
 const tools = require('../utils/tools')
+const authMiddleware = require('../middlewares/auth')
 
 const signup = async function(req, res, next) {
   res.set('Content-Type', 'application/json; charset=utf-8')
@@ -62,7 +63,6 @@ const signin = async function(req, res, next) {
           message: '用户登录成功.'
         })
       })
-
     } else {
       res.render('fail', {
         data: JSON.stringify({
@@ -79,25 +79,11 @@ const signin = async function(req, res, next) {
   }
 }
 
-const isSignin = function(req, res, next) {
-  res.set('Content-Type', 'application/json; charset=utf-8')
-  if (req.session.username) {
-    res.render('succ', {
-      data: JSON.stringify({
-        username: req.session.username
-      })
-    })
-  } else {
-    res.render('fail', {
-      data: JSON.stringify({
-        message: '没有权限.'
-      })
-    })
-  }
-}
+const isSignin = authMiddleware
 
 const signout = function(req, res, next) {
   req.session = null
+  res.set('Content-Type', 'application/json; charset=utf-8')
   res.render('succ', {
     data: JSON.stringify({
       message: '注销成功.'

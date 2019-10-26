@@ -10,6 +10,8 @@ router.use((req) => {
   $(`.sidebar-menu li[data-url=${url}]`).addClass('active').siblings().removeClass('active')
 })
 
+window.router = router
+
 router.route('/home', home)
 router.route('/position', position.list)
 

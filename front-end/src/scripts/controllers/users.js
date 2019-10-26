@@ -11,6 +11,8 @@ class Users {
   }
 
   async render() {
+    // 如果调用了一个async 方法，方法里如果有await
+    // 在调用的时候必须await
     await this.auth()
 
     let that = this
@@ -30,7 +32,7 @@ class Users {
     $('#btn-submit').on('click', this.handleSubmit.bind(this))
 
     // 注销
-    $('#btn-signout').on('click', async () => {
+    $('body').off('click').on('click', '#btn-signout', async () => {
       let result = await httpModel.get({
         url: '/api/users/signout'
       })

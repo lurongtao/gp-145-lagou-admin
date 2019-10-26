@@ -7,6 +7,9 @@ var cookieSession = require('cookie-session')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var positionRouter = require('./routes/position');
+
+const authMiddleware = require('./middlewares/auth')
 
 var app = express();
 
@@ -32,7 +35,8 @@ app.use(cookieSession({
 }))
 
 app.use('/', indexRouter);
-app.use('/api/users', usersRouter);
+app.use('/api/users', usersRouter)
+app.use('/api/position', authMiddleware, positionRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
