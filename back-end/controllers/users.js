@@ -56,7 +56,11 @@ const signin = async function(req, res, next) {
       let token = await tools.generateToken(username)
 
       // 往headers 注入一个自定义的字段，将token传给前端
-      res.header('X-Access-Token', token)
+      // res.header('X-Access-Token', token)
+
+      // 往浏览器里种cookie
+      res.cookie('token', token)
+      res.cookie('username', username)
       
       res.render('succ', {
         data: JSON.stringify({
@@ -84,7 +88,10 @@ const signin = async function(req, res, next) {
 const isSignin = authMiddleware
 
 const signout = function(req, res, next) {
-  req.session = null
+  // req.session = null
+  res.cookie('token', '')
+  res.cookie('username', '')
+  
   res.set('Content-Type', 'application/json; charset=utf-8')
   res.render('succ', {
     data: JSON.stringify({

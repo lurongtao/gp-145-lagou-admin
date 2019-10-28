@@ -3,13 +3,14 @@ const tools = require('../utils/tools')
 const isSignin = async function(req, res, next) {
   res.set('Content-Type', 'application/json; charset=utf-8')
 
-  let token = req.get('X-Access-Token')
-
+  // let token = req.get('X-Access-Token')
+  let { token, username } = req.cookies
+  
   if (token) {
     if (req.path === '/isSignin') {
       res.render('succ', {
         data: JSON.stringify({
-          username: req.session.username
+          username
         })
       })
     } else {
