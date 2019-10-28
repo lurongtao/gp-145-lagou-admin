@@ -1,3 +1,5 @@
+const positionModel = require('../models/positions')
+
 const findAll = (req, res, next) => {  
   res.set('Content-Type', 'application/json; charset=utf-8')
   res.render('succ', {
@@ -7,6 +9,27 @@ const findAll = (req, res, next) => {
   })
 }
 
+const save = async (req, res, next) => {
+  res.set('Content-Type', 'application/json; charset=utf-8')
+  let data = req.body
+  data.createTime = '2019-10-28 17:56'
+  let result = await positionModel.save(data)
+  if (result) {
+    res.render('succ', {
+      data: JSON.stringify({
+        message: '数据添加成功.'
+      })
+    })
+  } else {
+    res.render('fail', {
+      data: JSON.stringify({
+        message: '数据添加失败.'
+      })
+    })
+  }
+}
+
 module.exports = {
-  findAll
+  findAll,
+  save
 }

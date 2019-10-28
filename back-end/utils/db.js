@@ -6,6 +6,15 @@ const Users = mongoose.model('users', {
   password: String
 })
 
+const Positions = mongoose.model('positions', {
+  positionName: String,
+  companyName: String,
+  city: String,
+  salary: String,
+  createTime: String
+})
+
 module.exports = {
-  Users
+  Users,
+  Positions
 }

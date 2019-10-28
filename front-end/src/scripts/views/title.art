@@ -1,0 +1,7 @@
+<h1>
+  {{title.title}}
+</h1>
+<ol class="breadcrumb">
+  <li><a href="#/home"><i class="fa fa-dashboard"></i> {{breadcrumb.level1}}</a></li>
+  <li class="active">{{breadcrumb.level2}}</li>
+</ol>

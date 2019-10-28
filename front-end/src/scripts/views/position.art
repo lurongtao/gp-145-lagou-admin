@@ -1,1 +1,41 @@
-<div>position</div>
+<div class="box">
+  <div class="box-header with-border">
+    <h3 class="box-title">
+      <button type="button" id="btn-add" class="btn btn-block btn-success"><span class="fa fa-plus-circle"></span> 添加</button>
+    </h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <table class="table table-bordered">
+      <tr>
+        <th style="width: 10px">#</th>
+        <th style="width: 100px">公司logo</th>
+        <th>公司名称</th>
+        <th>职位名称</th>
+        <th style="width: 100px">招聘城市</th>
+        <th style="width: 140px">发布时间</th>
+        <th style="width: 100px">薪资</th>
+      </tr>
+      <tr>
+        <td>1.</td>
+        <td><img src="http://placehold.it/60x60" alt=""></td>
+        <td>千锋教育</td>
+        <td>高级讲师</td>
+        <td>北京</td>
+        <td>2019-10-28 4:51</td>
+        <td>20K-40K</td>
+      </tr>
+    </table>
+  </div>
+  <!-- /.box-body -->
+  <div class="box-footer clearfix">
+    <ul class="pagination pagination-sm no-margin pull-right">
+      <li><a href="#">&laquo;</a></li>
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">&raquo;</a></li>
+    </ul>
+  </div>
+</div>
+<!-- /.box -->
