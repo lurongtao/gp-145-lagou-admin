@@ -30,6 +30,7 @@
     "lodash": "^4.17.15",
     "sass-loader": "^8.0.0",
     "sme-router": "^0.12.8",
+    "store": "^2.0.12",
     "string-loader": "0.0.1",
     "style-loader": "^1.0.0"
   }
