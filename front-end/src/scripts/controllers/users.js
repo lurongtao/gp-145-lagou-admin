@@ -1,6 +1,9 @@
+import store from 'store'
+
 import navView from '../views/nav.art'
 
 import httpModel from '../models/http'
+
 
 class Users {
   constructor() {
@@ -33,12 +36,15 @@ class Users {
 
     // 注销
     $('body').off('click').on('click', '#btn-signout', async () => {
-      let result = await httpModel.get({
-        url: '/api/users/signout'
-      })
-      if (result.ret) {
-        location.reload()
-      }
+      // let result = await httpModel.get({
+      //   url: '/api/users/signout'
+      // })
+      // if (result.ret) {
+      //   location.reload()
+      // }
+
+      store.remove('token')
+      location.reload()
     })
   }
 
