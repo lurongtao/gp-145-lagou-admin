@@ -11,5 +11,10 @@ router.route('/')
   .get(position.findAll)
   .post(position.save)
   .patch(position.update)
+  .delete(position.remove)
+
+router.get('/findOne', position.findOne)
+
+router.post('/search', position.search)
 
 module.exports = router

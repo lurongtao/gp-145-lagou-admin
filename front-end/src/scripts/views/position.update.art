@@ -9,26 +9,26 @@
     <div class="box-body">
       <div class="form-group">
         <label for="companyName">公司名称</label>
-        <input type="text" class="form-control" id="companyName" name="companyName" placeholder="请输入公司名称">
+        <input type="text" value="{{item.companyName}}" class="form-control" id="companyName" name="companyName" placeholder="请输入公司名称">
       </div>
       <div class="form-group">
         <label for="positionName">职位名称</label>
-        <input type="text" class="form-control" id="positionName" name="positionName" placeholder="请输入职位名称">
+        <input type="text" value="{{item.positionName}}" class="form-control" id="positionName" name="positionName" placeholder="请输入职位名称">
       </div>
       <div class="form-group">
         <label for="city">招聘城市</label>
-        <input type="text" class="form-control" id="city" name="city" placeholder="请输入招聘城市">
+        <input type="text" value="{{item.city}}" class="form-control" id="city" name="city" placeholder="请输入招聘城市">
       </div>
       <div class="form-group">
         <label for="salary">职位薪资</label>
-        <input type="text" class="form-control" id="salary" name="salary" placeholder="请输入职位薪资">
+        <input type="text" value="{{item.salary}}" class="form-control" id="salary" name="salary" placeholder="请输入职位薪资">
       </div>
     </div>
     <!-- /.box-body -->
 
     <div class="box-footer">
-      <button type="button" id="posadd-back" class="btn btn-default">返回</button>
-      <button type="button" id="posadd-submit" class="btn btn-info pull-right">提交</button>
+      <button type="button" id="posedit-back" class="btn btn-default">返回</button>
+      <button type="button" id="posedit-submit" class="btn btn-info pull-right">提交</button>
     </div>
   </form>
 </div>
