@@ -5,6 +5,16 @@ const save = (data) => {
   return position.save()
 }
 
+const findAll = async () => {
+  return await Positions.find({}).sort({_id: -1})
+}
+
+const update = async (data) => {
+  return await Positions.findByIdAndUpdate(data.id, data)
+}
+
 module.exports = {
-  save
+  save,
+  findAll,
+  update
 }

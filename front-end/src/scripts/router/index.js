@@ -58,6 +58,7 @@ window.router = router
 router.route('/home', home)
 router.route('/position', position.list)
 router.route('/position_add', position.add)
+router.route('/position_update', position.update)
 
 router.route('*', (req, res, next) => {
   res.redirect('/home')

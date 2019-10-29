@@ -1,12 +1,23 @@
 const positionModel = require('../models/positions')
 
-const findAll = (req, res, next) => {  
+const findAll = async(req, res, next) => {  
   res.set('Content-Type', 'application/json; charset=utf-8')
-  res.render('succ', {
-    data: JSON.stringify({
-      list: []
+  
+  let result = await positionModel.findAll()
+
+  if (result) {
+    res.render('succ', {
+      data: JSON.stringify({
+        list: result
+      })
     })
-  })
+  } else {
+    res.render('fail', {
+      data: JSON.stringify({
+        list: []
+      })
+    })
+  }
 }
 
 const save = async (req, res, next) => {
@@ -29,7 +40,27 @@ const save = async (req, res, next) => {
   }
 }
 
+const update = async (req, res, next) => {
+  let data = req.body
+  let result = await positionModel.update(data)
+
+  if (result) {
+    res.render('succ', {
+      data: JSON.stringify({
+        message: '数据修改成功.'
+      })
+    })
+  } else {
+    res.render('fail', {
+      data: JSON.stringify({
+        message: '数据修改失败.'
+      })
+    })
+  }
+}
+
 module.exports = {
   findAll,
-  save
+  save,
+  update
 }

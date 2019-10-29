@@ -15,16 +15,23 @@
         <th style="width: 100px">招聘城市</th>
         <th style="width: 140px">发布时间</th>
         <th style="width: 100px">薪资</th>
+        <th style="width: 100px">操作</th>
       </tr>
+      {{each list}}
       <tr>
-        <td>1.</td>
+        <td>{{$index + 1}}</td>
         <td><img src="http://placehold.it/60x60" alt=""></td>
-        <td>千锋教育</td>
-        <td>高级讲师</td>
-        <td>北京</td>
-        <td>2019-10-28 4:51</td>
-        <td>20K-40K</td>
+        <td>{{$value.companyName}}</td>
+        <td>{{$value.positionName}}</td>
+        <td>{{$value.city}}</td>
+        <td>{{$value.createTime}}</td>
+        <td>{{$value.salary}}</td>
+        <td>
+          <button type="button" data-id="{{$value._id}}" class="btn btn-block btn-primary btn-update"><span class="fa fa-plus-circle"></span> 修改</button>
+          <button type="button" class="btn btn-block btn-danger btn-delete"><span class="fa fa-plus-circle"></span> 删除</button>
+        </td>
       </tr>
+      {{/each}}
     </table>
   </div>
   <!-- /.box-body -->
