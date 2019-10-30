@@ -39,6 +39,7 @@ const save = async (req, res, next) => {
   res.set('Content-Type', 'application/json; charset=utf-8')
   let data = req.body
   data.createTime = moment().format('YYYY-MM-DD HH:mm:ss')
+  data.companyLogo = req.filename
   let result = await positionModel.save(data)
   if (result) {
     res.render('succ', {

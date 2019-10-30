@@ -7,6 +7,7 @@ const Users = mongoose.model('users', {
 })
 
 const Positions = mongoose.model('positions', {
+  companyLogo: String,
   positionName: String,
   companyName: String,
   city: String,

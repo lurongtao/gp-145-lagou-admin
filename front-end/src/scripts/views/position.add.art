@@ -5,8 +5,18 @@
   </div>
   <!-- /.box-header -->
   <!-- form start -->
-  <form role="form" id="position-form">
+  <form 
+    role="form" 
+    method="post" 
+    id="position-form"
+    action="/api/position" 
+    enctype="multipart/form-data"
+  >
     <div class="box-body">
+      <div class="form-group">
+        <label for="companyLogo">公司Logo</label>
+        <input type="file" class="form-control" id="companyLogo" name="companyLogo" placeholder="请选择公司Logo">
+      </div>
       <div class="form-group">
         <label for="companyName">公司名称</label>
         <input type="text" class="form-control" id="companyName" name="companyName" placeholder="请输入公司名称">
@@ -28,7 +38,7 @@
 
     <div class="box-footer">
       <button type="button" id="posadd-back" class="btn btn-default">返回</button>
-      <button type="button" id="posadd-submit" class="btn btn-info pull-right">提交</button>
+      <button type="submit" id="posadd-submit" class="btn btn-info pull-right">提交</button>
     </div>
   </form>
 </div>

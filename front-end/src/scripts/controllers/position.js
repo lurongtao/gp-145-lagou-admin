@@ -75,20 +75,27 @@ export const list = async (req, res, next) => {
 export const add = async (req, res, next) => {
   res.render(positionAddView())
 
-  $('#posadd-submit').on('click', async() => {
-    let $form = $('#position-form')
-    let data = $form.serialize()
-    let result = await http.update({
-      url: '/api/position',
-      data
-    })
-    if (result.ret) {
-      $form[0].reset()
-    } else {
-      alert(result.data.message)
-    }
-  })
+  // $('#posadd-submit').on('click', async() => {
+  //   let $form = $('#position-form')
+  //   let data = $form.serialize()
+  //   let result = await http.update({
+  //     url: '/api/position',
+  //     data
+  //   })
+  //   if (result.ret) {
+  //     $form[0].reset()
+  //   } else {
+  //     alert(result.data.message)
+  //   }
+  // })
 
+  // $('#posadd-submit').on('click', () => {
+  //   console.log(0)
+    $('#position-form').ajaxForm(() => {
+      console.log(0)
+    })
+  // })
+  
   $('#posadd-back').on('click', () => {
     res.go('/position')
   })

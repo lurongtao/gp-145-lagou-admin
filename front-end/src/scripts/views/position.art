@@ -30,7 +30,7 @@
       {{each list}}
       <tr>
         <td>{{$index + 1}}</td>
-        <td><img src="http://placehold.it/60x60" alt=""></td>
+        <td><img style="width:60px; height:60px;" src="http://localhost:3000/uploads/{{$value.companyLogo}}" alt=""></td>
         <td>{{$value.companyName}}</td>
         <td>{{$value.positionName}}</td>
         <td>{{$value.city}}</td>

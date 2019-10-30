@@ -2,14 +2,11 @@ var express = require('express')
 var router = express.Router()
 
 let position = require('../controllers/position')
-
-// router.get('/findAll', position.findAll)
-// router.post('/save', position.save)
-// router.patch('/save')
+let uploadMiddleware = require('../middlewares/upload')
 
 router.route('/')
   .get(position.findAll)
-  .post(position.save)
+  .post(uploadMiddleware, position.save)
   .patch(position.update)
   .delete(position.remove)
 
