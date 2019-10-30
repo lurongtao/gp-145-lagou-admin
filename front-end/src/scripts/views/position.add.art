@@ -7,7 +7,7 @@
   <!-- form start -->
   <form 
     role="form" 
-    method="post" 
+    method="post"
     id="position-form"
     action="/api/position" 
     enctype="multipart/form-data"

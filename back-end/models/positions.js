@@ -5,8 +5,13 @@ const save = (data) => {
   return position.save()
 }
 
-const findAll = async () => {
-  return await Positions.find({}).sort({_id: -1})
+const findAll = async ({start, count}) => {
+  let list = await Positions.find({}).sort({_id: -1}).limit(~~count).skip(~~start)
+  let total = await Positions.find({}).count()
+  return {
+    list,
+    total
+  }
 }
 
 const findOne = async (id) => {

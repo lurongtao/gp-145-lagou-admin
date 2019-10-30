@@ -2,6 +2,7 @@ import positionView from '../views/position.art'
 import positionAddView from '../views/position.add.art'
 import positionUpdateView from '../views/position.update.art'
 import http from '../models/http'
+import _ from 'lodash'
 
 function _handleAddClick(res) {
   $('#btn-add').on('click', () => {
@@ -44,13 +45,23 @@ async function _handleSearch(res, keywords) {
 }
 
 export const list = async (req, res, next) => {
+  let count = 5
+  let currentPage = 1
+
   let result = await http.get({
-    url: '/api/position'
+    url: '/api/position',
+    data: {
+      start: (currentPage - 1) * count,
+      count
+    }
   })
   
   if (result.ret) {
+    let { list, total } = result.data
     res.render(positionView({
-      list: result.data.list
+      list,
+      pageCount: _.range(1, Math.ceil(total/count) + 1),
+      currentPage
     }))
 
     _handleAddClick(res)
@@ -91,8 +102,8 @@ export const add = async (req, res, next) => {
 
   // $('#posadd-submit').on('click', () => {
   //   console.log(0)
-    $('#position-form').ajaxForm(() => {
-      console.log(0)
+    $('#position-form').ajaxForm({
+      resetForm: true
     })
   // })
   
@@ -114,18 +125,32 @@ export const update = async (req, res, next) => {
     item: result.data
   }))
 
-  $('#posedit-submit').on('click', async() => {
-    let $form = $('#position-form')
-    let data = $form.serialize()
-    let result = await http.update({
-      url: '/api/position',
-      data: data + '&id=' + id,
-      type: 'patch'
-    })
-    if (result.ret) {
-      res.go('/position')
-    } else {
-      alert(result.data.message)
+  // $('#posedit-submit').on('click', async() => {
+  //   let $form = $('#position-form')
+  //   let data = $form.serialize()
+  //   let result = await http.update({
+  //     url: '/api/position',
+  //     data: data + '&id=' + id,
+  //     type: 'patch'
+  //   })
+  //   if (result.ret) {
+  //     res.go('/position')
+  //   } else {
+  //     alert(result.data.message)
+  //   }
+  // })
+
+  $('#position-form').ajaxForm({
+    resetForm: true,
+    dataType: 'json',
+    url: '/api/position',
+    method: 'patch',
+    success: (result) => {
+      if (result.ret) {
+        res.go('/position')
+      } else {
+        alert(result.data.message)
+      }
     }
   })
 

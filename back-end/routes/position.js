@@ -7,7 +7,7 @@ let uploadMiddleware = require('../middlewares/upload')
 router.route('/')
   .get(position.findAll)
   .post(uploadMiddleware, position.save)
-  .patch(position.update)
+  .patch(uploadMiddleware, position.update)
   .delete(position.remove)
 
 router.get('/findOne', position.findOne)

@@ -3,20 +3,18 @@ const moment = require('moment')
 
 const findAll = async(req, res, next) => {  
   res.set('Content-Type', 'application/json; charset=utf-8')
-  
-  let result = await positionModel.findAll()
+
+  let pageInfo = req.query
+
+  let result = await positionModel.findAll(pageInfo)
 
   if (result) {
     res.render('succ', {
-      data: JSON.stringify({
-        list: result
-      })
+      data: JSON.stringify(result)
     })
   } else {
     res.render('fail', {
-      data: JSON.stringify({
-        list: []
-      })
+      data: JSON.stringify({})
     })
   }
 }
@@ -58,6 +56,12 @@ const save = async (req, res, next) => {
 
 const update = async (req, res, next) => {
   let data = req.body
+  if (req.filename === '') {
+    delete data.companyLogo
+  } else {
+    data.companyLogo = req.filename
+  }
+  
   data.createTime = moment().format('YYYY-MM-DD HH:mm:ss')
   let result = await positionModel.update(data)
 

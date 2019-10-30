@@ -5,8 +5,17 @@
   </div>
   <!-- /.box-header -->
   <!-- form start -->
-  <form role="form" id="position-form">
+  <form 
+    role="form" 
+    id="position-form"
+    enctype="multipart/form-data"
+  >
     <div class="box-body">
+      <div class="form-group">
+        <label for="companyLogo">公司Logo</label>
+        <div><img style="width: 60px; height: 60px;" src="http://localhost:3000/uploads/{{item.companyLogo}}" alt=""></div>
+        <input type="file" class="form-control" id="companyLogo" name="companyLogo" placeholder="请选择公司Logo">
+      </div>
       <div class="form-group">
         <label for="companyName">公司名称</label>
         <input type="text" value="{{item.companyName}}" class="form-control" id="companyName" name="companyName" placeholder="请输入公司名称">
@@ -28,8 +37,9 @@
 
     <div class="box-footer">
       <button type="button" id="posedit-back" class="btn btn-default">返回</button>
-      <button type="button" id="posedit-submit" class="btn btn-info pull-right">提交</button>
+      <button type="submit" id="posedit-submit" class="btn btn-info pull-right">提交</button>
     </div>
+    <input type="hidden" name="id" value={{item._id}}>
   </form>
 </div>
 <!-- /.box -->
