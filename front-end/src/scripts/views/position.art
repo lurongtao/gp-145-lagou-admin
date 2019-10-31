@@ -38,25 +38,25 @@
         <td>{{$value.salary}}</td>
         <td>
           <button type="button" data-id="{{$value._id}}" class="btn btn-block btn-primary btn-update"><span class="fa fa-edit"></span> 修改</button>
-          <button type="button" data-id="{{$value._id}}" class="btn btn-block btn-danger btn-delete"><span class="fa fa-remove"></span> 删除</button>
+          <button type="button" data-id="{{$value._id}}" data-img={{$value.companyLogo}} class="btn btn-block btn-danger btn-delete"><span class="fa fa-remove"></span> 删除</button>
         </td>
       </tr>
       {{/each}}
     </table>
   </div>
   <!-- /.box-body -->
-  <div class="box-footer clearfix">
+  <div id="box-footer" class="box-footer clearfix">
     <ul class="pagination pagination-sm no-margin pull-right">
-      <li><a href="#">&laquo;</a></li>
+      <li><a href="javascript:void(0)" class="page-prev">&laquo;</a></li>
       {{each pageCount}}
       {{if currentPage === $value}}
         <li class="active">
       {{else}}
         <li>
       {{/if}}
-      <a href="#">{{$value}}</a></li>
+        <a href="javascript:void(0)" class="page-number">{{$value}}</a></li>
       {{/each}}
-      <li><a href="#">&raquo;</a></li>
+      <li><a href="javascript:void(0)" class="page-next">&raquo;</a></li>
     </ul>
   </div>
 </div>

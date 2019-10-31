@@ -8,7 +8,7 @@ import titleView from '../views/title.art'
 const router = new SMERouter('content')
 
 router.use((req) => {
-  let url = req.url.slice(1).split('?')[0].split('_')[0]
+  let url = req.url.slice(1).split('/')[0].split('?')[0].split('_')[0]
 
   // 高亮处理
   $(`.sidebar-menu li[data-url=${url}]`).addClass('active').siblings().removeClass('active')
@@ -59,6 +59,7 @@ router.route('/home', home)
 router.route('/position', position.list)
 router.route('/position_add', position.add)
 router.route('/position_update', position.update)
+router.route('/position_list/:page', position.list)
 
 router.route('*', (req, res, next) => {
   res.redirect('/home')

@@ -40,6 +40,7 @@
       <button type="submit" id="posedit-submit" class="btn btn-info pull-right">提交</button>
     </div>
     <input type="hidden" name="id" value={{item._id}}>
+    <input type="hidden" name="tempCompanylogo" value={{item.companyLogo}}>
   </form>
 </div>
 <!-- /.box -->

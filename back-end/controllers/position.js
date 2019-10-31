@@ -1,5 +1,7 @@
 const positionModel = require('../models/positions')
 const moment = require('moment')
+const fs = require('fs')
+const path = require('path')
 
 const findAll = async(req, res, next) => {  
   res.set('Content-Type', 'application/json; charset=utf-8')
@@ -81,10 +83,16 @@ const update = async (req, res, next) => {
 }
 
 const remove = async (req, res, next) => {
-  let id = req.body.id
+  let { id, tempCompanylogo } = req.body
   let result = positionModel.remove(id)
 
   if (result) {
+    fs.unlink(path.resolve(__dirname, '../public/uploads/' + tempCompanylogo), (err) => {
+      if (err) {
+        console.log(err.message)
+      }
+    })
+    
     res.render('succ', {
       data: JSON.stringify({
         message: '数据删除成功.'

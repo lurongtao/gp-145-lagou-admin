@@ -4,6 +4,8 @@ import positionUpdateView from '../views/position.update.art'
 import http from '../models/http'
 import _ from 'lodash'
 
+let count = 5
+
 function _handleAddClick(res) {
   $('#btn-add').on('click', () => {
     res.go('/position_add')
@@ -15,12 +17,29 @@ function _handleUpdateClick(res, obj) {
   res.go('/position_update', {id})
 }
 
+function _handlePageNumberClick(req, res, obj, type, pageCount) {
+  // list(req, res, next, ~~$(obj).text())
+  if (type) {
+    let page = ~~req.params.page
+    
+    if (type === 'prev' && page > 1) {
+      res.go('/position_list/' + (page - 1))
+    } else if (type === 'next' && page < pageCount.length) {
+      res.go('/position_list/' + (page + 1))
+    }
+
+  } else {
+    res.go('/position_list/' + ~~$(obj).text())
+  }
+}
+
 async function _handleDeleteClick(res, obj) {
   let id = $(obj).attr('data-id')
+  let tempCompanylogo = $(obj).attr('data-img')
   let result = await http.update({
     url: '/api/position',
     type: 'delete',
-    data: { id }
+    data: { id, tempCompanylogo }
   })
   if (result.ret) {
     res.go('/position?r=' + (new Date().getTime()))
@@ -45,9 +64,7 @@ async function _handleSearch(res, keywords) {
 }
 
 export const list = async (req, res, next) => {
-  let count = 5
-  let currentPage = 1
-
+  let currentPage = ~~req.params.page || 1
   let result = await http.get({
     url: '/api/position',
     data: {
@@ -55,12 +72,14 @@ export const list = async (req, res, next) => {
       count
     }
   })
+
+  let pageCount = _.range(1, Math.ceil(result.data.total/count) + 1)
   
   if (result.ret) {
-    let { list, total } = result.data
+    let { list } = result.data
     res.render(positionView({
       list,
-      pageCount: _.range(1, Math.ceil(total/count) + 1),
+      pageCount,
       currentPage
     }))
 
@@ -72,6 +91,7 @@ export const list = async (req, res, next) => {
   $('.btn-update').on('click', function() {
     _handleUpdateClick(res, this)
   })
+
   $('.btn-delete').on('click', function() {
     _handleDeleteClick(res, this)
   })
@@ -80,6 +100,18 @@ export const list = async (req, res, next) => {
     if (e.keyCode === 13) {
       _handleSearch(res, e.target.value)
     }
+  })
+
+  $('#box-footer a.page-number').on('click', function() {
+    _handlePageNumberClick(req, res, this)
+  })
+
+  $('#box-footer a.page-prev').on('click', function() {
+    _handlePageNumberClick(req, res, this, 'prev')
+  })
+
+  $('#box-footer a.page-next').on('click', function() {
+    _handlePageNumberClick(req, res, this, 'next', pageCount)
   })
 }
 

@@ -1,6 +1,7 @@
 const path = require('path')
 const multer = require('multer')
 const randomstring = require('randomstring')
+const fs = require('fs')
 
 // const upload = multer({
 //   dest: path.resolve(__dirname, '../public/uploads')
@@ -37,6 +38,13 @@ const upload = multer({
 
 module.exports = (req, res, next) => {
   upload(req, res, (err) => {
+    if (filename) {
+      fs.unlink(path.resolve(__dirname, '../public/uploads/' + req.body.tempCompanylogo), (err) => {
+        if (err) {
+          console.log(err.message)
+        }
+      })
+    }
     req.filename = filename
     next()
   })
