@@ -16,35 +16,44 @@
   </div>
   <!-- /.box-header -->
   <div class="box-body">
-    <table class="table table-bordered">
-      <tr>
-        <th style="width: 10px">#</th>
-        <th style="width: 100px">公司logo</th>
-        <th>公司名称</th>
-        <th>职位名称</th>
-        <th style="width: 100px">招聘城市</th>
-        <th style="width: 140px">发布时间</th>
-        <th style="width: 100px">薪资</th>
-        <th style="width: 100px">操作</th>
-      </tr>
-      {{each list}}
-      <tr>
-        <td>{{$index + 1}}</td>
-        <td><img style="width:60px; height:60px;" src="http://localhost:3000/uploads/{{$value.companyLogo}}" alt=""></td>
-        <td>{{$value.companyName}}</td>
-        <td>{{$value.positionName}}</td>
-        <td>{{$value.city}}</td>
-        <td>{{$value.createTime}}</td>
-        <td>{{$value.salary}}</td>
-        <td>
-          <button type="button" data-id="{{$value._id}}" class="btn btn-block btn-primary btn-update"><span class="fa fa-edit"></span> 修改</button>
-          <button type="button" data-id="{{$value._id}}" data-img={{$value.companyLogo}} class="btn btn-block btn-danger btn-delete"><span class="fa fa-remove"></span> 删除</button>
-        </td>
-      </tr>
-      {{/each}}
-    </table>
+    {{if list.length === 0}}
+      <table class="table table-bordered">
+        <tr>
+          <td> 暂无数据. </td>
+        </tr>
+      </table>
+    {{else}}
+      <table class="table table-bordered">
+        <tr>
+          <th style="width: 10px">#</th>
+          <th style="width: 100px">公司logo</th>
+          <th>公司名称</th>
+          <th>职位名称</th>
+          <th style="width: 100px">招聘城市</th>
+          <th style="width: 140px">发布时间</th>
+          <th style="width: 100px">薪资</th>
+          <th style="width: 100px">操作</th>
+        </tr>
+        {{each list}}
+        <tr>
+          <td>{{$index + 1}}</td>
+          <td><img style="width:60px; height:60px;" src="{{$value.companyLogo ? 'http://localhost:3000/uploads/' + $value.companyLogo : 'http://placehold.it/60x60'}}" alt=""></td>
+          <td>{{$value.companyName}}</td>
+          <td>{{$value.positionName}}</td>
+          <td>{{$value.city}}</td>
+          <td>{{$value.createTime}}</td>
+          <td>{{$value.salary}}</td>
+          <td>
+            <button type="button" data-id="{{$value._id}}" class="btn btn-block btn-primary btn-update"><span class="fa fa-edit"></span> 修改</button>
+            <button type="button" data-id="{{$value._id}}" data-img="{{$value.companyLogo}}" class="btn btn-block btn-danger btn-delete"><span class="fa fa-remove"></span> 删除</button>
+          </td>
+        </tr>
+        {{/each}}
+      </table>
+    {{/if}}
   </div>
   <!-- /.box-body -->
+  {{if list.length > 0 && from === 'list' }}
   <div id="box-footer" class="box-footer clearfix">
     <ul class="pagination pagination-sm no-margin pull-right">
       <li><a href="javascript:void(0)" class="page-prev">&laquo;</a></li>
@@ -59,5 +68,6 @@
       <li><a href="javascript:void(0)" class="page-next">&raquo;</a></li>
     </ul>
   </div>
+  {{/if}}
 </div>
 <!-- /.box -->

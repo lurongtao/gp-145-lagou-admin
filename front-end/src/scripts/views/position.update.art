@@ -13,7 +13,7 @@
     <div class="box-body">
       <div class="form-group">
         <label for="companyLogo">公司Logo</label>
-        <div><img style="width: 60px; height: 60px;" src="http://localhost:3000/uploads/{{item.companyLogo}}" alt=""></div>
+        <div><img style="width: 60px; height: 60px;" src="{{item.companyLogo ? 'http://localhost:3000/uploads/' + item.companyLogo : 'http://placehold.it/60x60'}}" alt=""></div>
         <input type="file" class="form-control" id="companyLogo" name="companyLogo" placeholder="请选择公司Logo">
       </div>
       <div class="form-group">

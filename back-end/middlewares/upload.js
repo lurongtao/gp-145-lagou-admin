@@ -46,6 +46,9 @@ module.exports = (req, res, next) => {
       })
     }
     req.filename = filename
+
+    // 将filename置空，不然下一次修改会沿用上一次修改的图片
+    filename = ''
     next()
   })
 }

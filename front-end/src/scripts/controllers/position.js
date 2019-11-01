@@ -4,7 +4,7 @@ import positionUpdateView from '../views/position.update.art'
 import http from '../models/http'
 import _ from 'lodash'
 
-let count = 5
+let count = 6
 
 function _handleAddClick(res) {
   $('#btn-add').on('click', () => {
@@ -33,7 +33,7 @@ function _handlePageNumberClick(req, res, obj, type, pageCount) {
   }
 }
 
-async function _handleDeleteClick(res, obj) {
+async function _handleDeleteClick(req, res, obj) {
   let id = $(obj).attr('data-id')
   let tempCompanylogo = $(obj).attr('data-img')
   let result = await http.update({
@@ -41,12 +41,18 @@ async function _handleDeleteClick(res, obj) {
     type: 'delete',
     data: { id, tempCompanylogo }
   })
+
   if (result.ret) {
-    res.go('/position?r=' + (new Date().getTime()))
+    res.go('/position_list/' + (req.params.page || 1) + '?r=' + (new Date().getTime()))
   }
 }
 
 async function _handleSearch(res, keywords) {
+  if (keywords === '') {
+    res.go('/position_list/1' + '?r=' + new Date().getTime())
+    return
+  }
+
   let result = await http.update({
     url: '/api/position/search',
     data: {
@@ -56,10 +62,9 @@ async function _handleSearch(res, keywords) {
 
   if (result.ret) {
     res.render(positionView({
-      list: result.data.list
+      list: result.data.list,
+      from: 'search'
     }))
-  } else {
-    res.go('/position')
   }
 }
 
@@ -73,6 +78,11 @@ export const list = async (req, res, next) => {
     }
   })
 
+  if (result.data.list.length === 0 && currentPage > 1) {
+    res.go('/position_list/' + (currentPage - 1))
+    return
+  }
+
   let pageCount = _.range(1, Math.ceil(result.data.total/count) + 1)
   
   if (result.ret) {
@@ -80,7 +90,8 @@ export const list = async (req, res, next) => {
     res.render(positionView({
       list,
       pageCount,
-      currentPage
+      currentPage,
+      from: 'list'
     }))
 
     _handleAddClick(res)
@@ -93,7 +104,7 @@ export const list = async (req, res, next) => {
   })
 
   $('.btn-delete').on('click', function() {
-    _handleDeleteClick(res, this)
+    _handleDeleteClick(req, res, this)
   })
 
   $('body').on('keyup', '#search', (e) => {
@@ -179,7 +190,7 @@ export const update = async (req, res, next) => {
     method: 'patch',
     success: (result) => {
       if (result.ret) {
-        res.go('/position')
+        res.back()
       } else {
         alert(result.data.message)
       }
@@ -187,6 +198,6 @@ export const update = async (req, res, next) => {
   })
 
   $('#posedit-back').on('click', () => {
-    res.go('/position')
+    res.back()
   })
 }
